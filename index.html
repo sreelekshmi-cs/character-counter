@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter</title>
+    <style>
+        * { box-sizing: border-box; font-family: Arial, sans-serif; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f1f5f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px #0002;
+        }
+
+        h2 { text-align: center; color: #333; }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            resize: none;
+            font-size: 16px;
+        }
+
+        .count {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #555;
+        }
+
+        #warning { color: red; margin-top: 10px; }
+        .bar {
+    height: 8px;
+    background: #ddd;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+#fill {
+    height: 100%;
+    width: 0%;
+    background: green;
+    border-radius: 10px;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Character Counter</h2>
+        <p>Maximum 200 characters allowed.</p>
+        <textarea id="message" maxlength="200"
+            placeholder="Type your message here..."></textarea>
+            <div class="bar">
+    <div id="fill"></div>
+</div>
+
+        <div class="count">
+            <span id="typed">0 characters typed</span>
+            <span id="remaining">200 remaining</span>
+        </div>
+        <p id="warning"></p>
+    </div>
+    
+
+    <script>
+        const message = document.getElementById("message");
+        const typed = document.getElementById("typed");
+        const remaining = document.getElementById("remaining");
+        const warning = document.getElementById("warning");
+        const fill = document.getElementById("fill");
+
+        message.addEventListener("input", function () {
+            let count = message.value.length;
+
+            typed.textContent = count + " characters typed";
+            remaining.textContent = (200 - count) + " remaining";
+            warning.textContent = count === 200
+                ? "Character limit reached!" : "";
+            fill.style.width = (count / 200 * 100) + "%";
+        });
+    </script>
+
+</body>
+</html>
